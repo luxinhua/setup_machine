@@ -8,6 +8,9 @@ set -v
 echo  ${USER} | sudo apt install net-tools
 if [ $? -ne 0 ]; then echo 'sudo apt install net-tools' &&  exit 1 ;fi
 
+cmd='ping github.com -c2'
+${cmd}; if [ $? -ne 0 ]; then echo ${cmd} &&  exit 1 ;fi
+
 ifconfig 
 if [ $? -ne 0 ]; then echo 'ifconfig' &&  exit 1 ;fi
 
@@ -72,7 +75,7 @@ dG9jcmxmID0gdHJ1ZQoJc3NoQ29tbWFuZCA9IHNzaCAtaSB+Ly5zc2gvaWRfcnNhCltodHRwXQoJ
 c3NsVmVyaWZ5ID0gZmFsc2UKCg=="| base64 -d | tee ~/.gitconfig
 if [ $? -ne 0 ]; then echo '~/.gitconfig' &&  exit 1 ;fi
 
-cmd='ping github.com -c4'
+cmd='ping github.com -c2'
 ${cmd}; if [ $? -ne 0 ]; then echo ${cmd} &&  exit 1 ;fi
 
 echo  ${USER} | sudo systemctl status sshd.service
